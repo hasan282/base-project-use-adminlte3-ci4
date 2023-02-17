@@ -23,6 +23,9 @@
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="/adminlte/dist/js/adminlte.min.js"></script>
+
+<?= $this->renderSection('jscript'); ?>
+
 </body>
 
 </html>

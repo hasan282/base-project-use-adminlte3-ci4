@@ -6,6 +6,11 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('layout/login');
+        $this->view('layout/login');
+    }
+
+    public function admin()
+    {
+        $this->view('layout/blank');
     }
 }
