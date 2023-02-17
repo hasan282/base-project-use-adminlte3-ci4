@@ -9,46 +9,50 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class BaseController
+ *
+ * BaseController provides a convenient place for loading components
+ * and performing functions that are needed by all your controllers.
+ * Extend this class in any new controllers:
+ *     class Home extends BaseController
+ *
+ * For security be sure to declare any new methods as protected or private.
+ */
 abstract class BaseController extends Controller
 {
     /**
      * Instance of the main Request object.
+     *
      * @var CLIRequest|IncomingRequest
      */
     protected $request;
-    protected $helpers = [];
-    private $dataviews, $options;
-
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
-        $this->dataviews = array();
-        $this->options = global_options();
-        $this->_autoloaders();
-    }
 
     /**
-     * Print html view with option setup
-     * @param string view file path
-     * @param array data send parameter (optional)
+     * An array of helpers to be loaded automatically upon
+     * class instantiation. These helpers will be available
+     * to all other controllers that extend BaseController.
+     *
+     * @var array
      */
-    protected function view(string $view, $data = array())
-    {
-        $dataview = (empty($data)) ? $this->dataviews : $data;
-        $resource = view($view, $dataview);
-        if ($this->options['remove_new_line'])
-            $resource = trim(preg_replace('/\s\s+/', ' ', $resource));
-        echo $resource;
-    }
+    protected $helpers = [];
 
-    protected function data(array $data)
-    {
-        $this->dataviews = $data;
-    }
+    /**
+     * Be sure to declare properties for any property fetch you initialized.
+     * The creation of dynamic property is deprecated in PHP 8.2.
+     */
+    // protected $session;
 
-    private function _autoloaders()
+    /**
+     * Constructor.
+     */
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
-        $this->session = \Config\Services::session();
-        $this->plugin = new \App\Libraries\Plugins;
+        // Do Not Edit This Line
+        parent::initController($request, $response, $logger);
+
+        // Preload any models, libraries, etc, here.
+
+        // E.g.: $this->session = \Config\Services::session();
     }
 }

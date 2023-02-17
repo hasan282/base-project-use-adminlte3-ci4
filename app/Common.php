@@ -1,28 +1,15 @@
 <?php
 
-if (!function_exists('set_routes')) {
-    function set_routes($route)
-    {
-        $route->get('/', 'Home::index');
-        $route->get('/admin', 'Home::admin');
-
-        $route->get('home/(:segment)', 'Home::$1');
-    }
-}
-
-if (!function_exists('global_options')) {
-    function global_options()
-    {
-        return array(
-            'remove_new_line' => false
-        );
-    }
-}
-
-/*
-if (!function_exists('function_name')) {
-    function function_name()
-    {
-    }
-}
-*/
+/**
+ * The goal of this file is to allow developers a location
+ * where they can overwrite core procedural functions and
+ * replace them with their own. This file is loaded during
+ * the bootstrap process and is called during the framework's
+ * execution.
+ *
+ * This can be looked at as a `master helper` file that is
+ * loaded early on, and may also contain additional functions
+ * that you'd like to use throughout your entire application
+ *
+ * @see: https://codeigniter4.github.io/CodeIgniter4/
+ */
