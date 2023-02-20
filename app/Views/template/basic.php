@@ -10,19 +10,14 @@
     <link rel="icon" href="/icon/icon32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="/icon/icon64.png" sizes="64x64" type="image/png">
     <link rel="apple-touch-icon" href="/icon/icon128.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
+
+    <?= $plugin->head(); ?>
+
 </head>
 
 <?= $this->renderSection('body'); ?>
 
-<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
-<script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="/adminlte/dist/js/adminlte.min.js"></script>
+<?= $plugin->foot(); ?>
 
 <?= $this->renderSection('jscript'); ?>
 

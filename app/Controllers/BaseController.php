@@ -24,14 +24,13 @@ abstract class BaseController extends Controller
      * @var array
      */
     protected $helpers = [];
+    protected $plugin;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
-
-        // Preload any models, libraries, etc, here.
-        // E.g.: $this->session = \Config\Services::session();
+        $this->_autoloaders();
     }
 
     /**
@@ -41,8 +40,15 @@ abstract class BaseController extends Controller
      */
     protected function view(string $view, array $data = [])
     {
+        $data['plugin'] = $this->plugin;
         $source = view($view, $data);
         if (!env_is('development')) $source = trim(preg_replace('/\s\s+/', ' ', $source));
         echo $source;
+    }
+
+    private function _autoloaders()
+    {
+        // $this->session = \Config\Services::session();
+        $this->plugin = new \App\Libraries\Plugins(['refresher' => true]);
     }
 }

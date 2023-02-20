@@ -7,11 +7,11 @@ class Plugins
     private $settings, $plugins, $used;
     private $header, $footer;
 
-    public function __construct()
+    public function __construct(array $setting = [])
     {
-        $this->_settings();
+        $this->_settings($setting);
         $this->_plugindata();
-        $this->used = array('basic');
+        $this->used = array('basic', 'fontawesome');
         $this->_createlist();
     }
 
@@ -21,7 +21,7 @@ class Plugins
             'basic' => array(
                 ['url' => 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/dist/css/adminlte.min.css', 'tipe' => 'css|head'],
-                ['url' => '(base_url)/adminlte/plugins/jquery/jquery.min.js', 'tipe' => 'js|head'],
+                ['url' => '(base_url)/adminlte/plugins/jquery/jquery.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/dist/js/adminlte.min.js', 'tipe' => 'js|foot']
             ),
@@ -46,7 +46,7 @@ class Plugins
                 ['url' => '(base_url)/adminlte/plugins/inputmask/jquery.inputmask.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/daterangepicker/daterangepicker.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js', 'tipe' => 'js|foot']
-            ),
+            )
             /*
             'name' => array(
                 ['url' => '(base_url)/url(refresher)', 'tipe' => 'css or js|head or foot']
@@ -55,45 +55,89 @@ class Plugins
         );
     }
 
-    public function setup(string $list, bool $base_url = null)
+    public function setup(string $list, bool $baseurl = null)
     {
-        if ($base_url !== null) $this->settings['base_url'] = $base_url;
+        if ($baseurl !== null) $this->settings['base_url'] = $baseurl;
         $usedPlugins = explode('|', $list);
         foreach ($usedPlugins as $up) {
             if (!in_array($up, $this->used)) array_push($this->used, $up);
         }
+        $this->_createlist();
     }
 
     public function head(bool $new_line = null)
     {
-        d($this->settings);
-        d($this->plugins);
-
-        var_dump(array_keys($this->plugins));
+        $separator = $this->_separator($new_line);
+        return implode($separator, $this->header) . $separator;
     }
 
     public function foot(bool $new_line = null)
     {
-        echo 'Plugin Bottom';
+        $separator = $this->_separator($new_line);
+        return implode($separator, $this->footer) . $separator;
     }
 
-    private function _settings()
+    private function _settings(array $setting = [])
     {
-        $globalOption = global_options();
-        $this->settings = array(
+        $baseSettings = array(
             'base_url' => false,
-            'new_line' => !$globalOption['remove_new_line'],
+            'new_line' => env_is('development'),
             'refresher' => false,
             'refresh_variable' => 'plug=in',
             'refresh_range' => array(1000, 9999)
         );
+        foreach ($setting as $key => $val) {
+            if (in_array($key, array_keys($baseSettings))) $baseSettings[$key] = $val;
+        }
+        $this->settings = $baseSettings;
     }
 
     private function _createlist()
     {
-        $this->header = array();
-        $this->footer = array();
+        $headers = array();
+        $footers = array();
+        $baseurl = ($this->settings['base_url']) ? rtrim(base_url(), '/') : '';
+        $refresher = ($this->settings['refresher']) ?
+            '?' . $this->settings['refresh_variable'] . mt_rand(
+                $this->settings['refresh_range'][0],
+                $this->settings['refresh_range'][1]
+            ) : '';
         foreach ($this->plugins as $name => $pl) {
+            if (in_array($name, $this->used)) {
+                foreach ($pl as $list) {
+                    $url = $list['url'];
+                    $tipe = explode('|', $list['tipe']);
+                    $url = str_replace(
+                        array('(base_url)', '(refresher)'),
+                        array($baseurl, $refresher),
+                        $url
+                    );
+                    if ($tipe[1] == 'head') array_push($headers, $this->_createtag($url, $tipe[0]));
+                    if ($tipe[1] == 'foot') array_push($footers, $this->_createtag($url, $tipe[0]));
+                }
+            }
         }
+        $this->header = $headers;
+        $this->footer = $footers;
+    }
+
+    private function _createtag(string $url, string $tipe)
+    {
+        $source = '';
+        $tags = array(
+            'css' => '<link rel="stylesheet" href="(url)">',
+            'js' => '<script src="(url)"></script>'
+        );
+        if (in_array($tipe, array_keys($tags))) {
+            $source = str_replace('(url)', $url, $tags[$tipe]);
+        }
+        return $source;
+    }
+
+    private function _separator($newline)
+    {
+        $addNewLine = $this->settings['new_line'];
+        if (is_bool($newline)) $addNewLine = $newline;
+        return ($addNewLine) ? PHP_EOL : '';
     }
 }
