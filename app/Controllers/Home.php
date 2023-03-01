@@ -6,13 +6,12 @@ class Home extends BaseController
 {
     public function index()
     {
-        $this->plugin->setup('icheck');
-        $this->view('layout/login');
     }
 
     public function admin()
     {
+        $data['title'] = 'Admin Page';
         $this->plugin->setup('scrollbar');
-        $this->view('layout/blank');
+        $this->view('layout/blank', $data);
     }
 }

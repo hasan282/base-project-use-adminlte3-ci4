@@ -23,7 +23,7 @@ abstract class BaseController extends Controller
      * to all other controllers that extend BaseController.
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['cookie', 'enkripsi'];
     protected $plugin;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
@@ -40,15 +40,17 @@ abstract class BaseController extends Controller
      */
     protected function view(string $view, array $data = [])
     {
-        $data['plugin'] = $this->plugin;
+        $data['adminPlugins'] = $this->plugin;
         $source = view($view, $data);
-        if (!env_is('development')) $source = trim(preg_replace('/\s\s+/', ' ', $source));
+        if (env_is('production')) $source = trim(preg_replace('/\s\s+/', ' ', $source));
         echo $source;
     }
 
     private function _autoloaders()
     {
-        // $this->session = \Config\Services::session();
-        $this->plugin = new \App\Libraries\Plugins(['refresher' => true]);
+        $this->session = \Config\Services::session();
+        $this->plugin = new \App\Libraries\Plugins(array(
+            'refresher' => true, 'autoload' => 'basic|fontawesome'
+        ));
     }
 }

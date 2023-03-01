@@ -11,7 +11,7 @@ class Plugins
     {
         $this->_settings($setting);
         $this->_plugindata();
-        $this->used = array('basic', 'fontawesome');
+        $this->used = explode('|', $this->settings['autoload']);
         $this->_createlist();
     }
 
@@ -30,6 +30,9 @@ class Plugins
             ),
             'icheck' => array(
                 ['url' => '(base_url)/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css', 'tipe' => 'css|head']
+            ),
+            'ionicon' => array(
+                ['url' => 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', 'tipe' => 'css|head']
             ),
             'scrollbar' => array(
                 ['url' => '(base_url)/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css', 'tipe' => 'css|head'],
@@ -84,7 +87,8 @@ class Plugins
             'new_line' => env_is('development'),
             'refresher' => false,
             'refresh_variable' => 'plug=in',
-            'refresh_range' => array(1000, 9999)
+            'refresh_range' => array(1000, 9999),
+            'autoload' => 'basic'
         );
         foreach ($setting as $key => $val) {
             if (in_array($key, array_keys($baseSettings))) $baseSettings[$key] = $val;

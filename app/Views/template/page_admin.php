@@ -33,9 +33,9 @@
                 </div>
             </div>
         </div>
-        <footer class="main-footer">
+        <footer class="main-footer text-sm">
             <div class="text-center">
-                <strong>Copyright &copy; <?= date('Y'); ?> <a href="https://ptjis.com" target="_blank">PTJIS</a></strong> All rights reserved
+                <strong>&copy; <?= date('Y'); ?> <a href="https://ptjis.com" target="_blank">PTJIS</a></strong> All rights reserved
             </div>
         </footer>
     </div>

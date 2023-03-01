@@ -111,7 +111,7 @@ class App extends BaseConfig
      * The default timezone that will be used in your application to display
      * dates with the date helper, and can be retrieved through app_timezone()
      */
-    public string $appTimezone = 'UTC';
+    public string $appTimezone = 'Asia/Jakarta';
 
     /**
      * --------------------------------------------------------------------------
@@ -161,7 +161,7 @@ class App extends BaseConfig
      *
      * @deprecated use Config\Session::$cookieName  instead.
      */
-    public string $sessionCookieName = 'ci_session';
+    public string $sessionCookieName = 'SESSCI';
 
     /**
      * --------------------------------------------------------------------------
@@ -173,7 +173,7 @@ class App extends BaseConfig
      *
      * @deprecated use Config\Session::$expiration instead.
      */
-    public int $sessionExpiration = 7200;
+    public int $sessionExpiration = 0;
 
     /**
      * --------------------------------------------------------------------------

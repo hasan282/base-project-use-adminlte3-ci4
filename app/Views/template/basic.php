@@ -11,13 +11,13 @@
     <link rel="icon" href="/icon/icon64.png" sizes="64x64" type="image/png">
     <link rel="apple-touch-icon" href="/icon/icon128.png">
 
-    <?= $plugin->head(); ?>
+    <?= $adminPlugins->head(); ?>
 
 </head>
 
 <?= $this->renderSection('body'); ?>
 
-<?= $plugin->foot(); ?>
+<?= $adminPlugins->foot(); ?>
 
 <?= $this->renderSection('jscript'); ?>
 
