@@ -20,10 +20,10 @@ class Plugins
         $this->plugins = array(
             'basic' => array(
                 ['url' => 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback', 'tipe' => 'css|head'],
-                ['url' => '(base_url)/adminlte/dist/css/adminlte.min.css', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/adminlte/asset/css/adminlte.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/jquery/jquery.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'tipe' => 'js|foot'],
-                ['url' => '(base_url)/adminlte/dist/js/adminlte.min.js', 'tipe' => 'js|foot']
+                ['url' => '(base_url)/adminlte/asset/js/adminlte.min.js', 'tipe' => 'js|foot']
             ),
             'fontawesome' => array(
                 ['url' => '(base_url)/adminlte/plugins/fontawesome-free/css/all.min.css', 'tipe' => 'css|head']
@@ -45,10 +45,23 @@ class Plugins
             'dateinput' => array(
                 ['url' => '(base_url)/adminlte/plugins/daterangepicker/daterangepicker.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css', 'tipe' => 'css|head'],
-                ['url' => '(base_url)/adminlte/plugins/moment/moment.min.js', 'tipe' => 'js|head'],
+                ['url' => '(base_url)/adminlte/plugins/moment/moment.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/inputmask/jquery.inputmask.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/daterangepicker/daterangepicker.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js', 'tipe' => 'js|foot']
+            ),
+            'jspdf' => array(
+                ['url' => 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', 'tipe' => 'js|foot'],
+                ['url' => 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', 'tipe' => 'js|foot']
+            ),
+            'pdfmake' => array(
+                ['url' => '(base_url)/adminlte/plugins/pdfmake/pdfmake.min.js', 'tipe' => 'js|foot'],
+                ['url' => '(base_url)/adminlte/plugins/pdfmake/vfs_fonts.js', 'tipe' => 'js|foot'],
+            ),
+            'select2' => array(
+                ['url' => '(base_url)/adminlte/plugins/select2/css/select2.min.css', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/adminlte/plugins/select2/js/select2.full.min.js', 'tipe' => 'js|foot']
             )
             /*
             'name' => array(
@@ -87,7 +100,7 @@ class Plugins
             'new_line' => env_is('development'),
             'refresher' => false,
             'refresh_variable' => 'plug=in',
-            'refresh_range' => array(1000, 9999),
+            'refresh_range' => array(100000, 999999),
             'autoload' => 'basic'
         );
         foreach ($setting as $key => $val) {
