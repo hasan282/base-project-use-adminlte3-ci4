@@ -1,5 +1,25 @@
 <?php
 
+// change to true if already move to hosting
+define('IS_HOSTING', false);
+// ---------------- dont forget to change spark
+
+// folder name on public_html
+define('PUBLIC_FOLDERNAME', !IS_HOSTING ? 'public' : 'foldername_public');
+// ------------------------------------------------- dont forget to change spark
+
+// folder name on root directory
+define('APP_FOLDERNAME', 'foldername_in_root');
+// ------------------------------------------------
+
+// path of config paths.php file
+define(
+    'PATHS_CONFIG_FILE',
+    !IS_HOSTING ?
+        '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php' :
+        '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . APP_FOLDERNAME . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php'
+);
+
 // Check PHP version.
 $minPhpVersion = '7.4'; // If you update this, don't forget to update `spark`.
 if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
@@ -29,7 +49,11 @@ chdir(FCPATH);
 
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
-require FCPATH . '../app/Config/Paths.php';
+
+require FCPATH . PATHS_CONFIG_FILE;
+
+// require realpath(FCPATH . PATHS_CONFIG_FILE) ?: FCPATH . PATHS_CONFIG_FILE;
+
 // ^^^ Change this line if you move your application folder
 
 $paths = new Config\Paths();
