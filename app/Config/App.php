@@ -22,7 +22,7 @@ class App extends BaseConfig
      * explicitly and never rely on auto-guessing, especially in production
      * environments.
      */
-    public string $baseURL = 'http://localhost:8080/';
+    public string $baseURL = '';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -47,7 +47,7 @@ class App extends BaseConfig
      * something else. If you are using mod_rewrite to remove the page set this
      * variable so that it is blank.
      */
-    public string $indexPage = 'index.php';
+    public string $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------
@@ -354,7 +354,7 @@ class App extends BaseConfig
      *
      * @deprecated Use `Config\Security` $tokenName property instead of using this property.
      */
-    public string $CSRFTokenName = 'csrf_test_name';
+    public string $CSRFTokenName = 'csrf_token';
 
     /**
      * --------------------------------------------------------------------------
@@ -376,7 +376,7 @@ class App extends BaseConfig
      *
      * @deprecated Use `Config\Security` $cookieName property instead of using this property.
      */
-    public string $CSRFCookieName = 'csrf_cookie_name';
+    public string $CSRFCookieName = 'CSRFTKC';
 
     /**
      * --------------------------------------------------------------------------

@@ -6,29 +6,33 @@ class PDFMake
 {
     private $setting, $allFont, $content;
 
+    protected $images, $pageWidth, $pageHeight;
+
     public function __construct()
     {
         $this->_fontList();
         $this->setting = array(
             'pageOrientation' => 'potrait',
-            'pageSize' => 'A4',
             'pageMargins' => array(60, 70, 60, 10),
             'defaultStyle' => array(
                 'font' => 'Arial',
                 'fontSize' => 12
             )
         );
+        $this->setPageSize('A4');
         $this->content = array(
             'text' => '----- PDFMake -----',
             'bold' => true,
             'alignment' => 'center'
         );
+        $this->images = array();
     }
 
     public function getPDF()
     {
         $pdf = $this->setting;
         $pdf['content'] = $this->content;
+        $pdf['images'] = $this->images;
         return $pdf;
     }
 
@@ -46,17 +50,27 @@ class PDFMake
         return $this;
     }
 
-    public function setPageSize($size = 'A4')
+    public function setPageSize($size)
     {
-        $paper = array('A5', 'A4', 'LEGAL', 'LETTER');
-        if (in_array($size, $paper)) {
-            $this->setting['pageSize'] = $size;
+        $paper = array(
+            'A5' => array(419, 595),
+            'A4' => array(595, 842),
+            'LEGAL' => array(612, 1008),
+            'LETTER' => array(612, 792)
+        );
+        if (is_string($size)) {
+            if (array_key_exists($size, $paper)) {
+                $this->setting['pageSize'] = $size;
+                $this->pageWidth = $paper[$size][0];
+                $this->pageHeight = $paper[$size][1];
+            }
         }
         return $this;
     }
 
-    public function setPageMargin($margin = 60)
+    public function setPageMargin($margin)
     {
+        $this->setting['pageMargins'] = 60;
         if (is_integer($margin)) $this->setting['pageMargins'] = $margin;
         if (is_array($margin)) {
             if (!empty($margin) && sizeof($margin) < 5)
@@ -111,7 +125,7 @@ class PDFMake
 
     private function _fontList()
     {
-        $fontLocation = base_url('asset/font');
+        $fontLocation = base_url('fonts');
         $this->allFont = array(
             'Arial' => array(
                 'normal' => $fontLocation . '/arial.ttf',

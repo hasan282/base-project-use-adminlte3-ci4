@@ -23,7 +23,7 @@ abstract class BaseController extends Controller
      * to all other controllers that extend BaseController.
      * @var array
      */
-    protected $helpers = ['cookie', 'enkripsi', 'format'];
+    protected $helpers = ['cookie', 'enkripsi', 'format', 'user', 'form'];
     protected $plugin;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)

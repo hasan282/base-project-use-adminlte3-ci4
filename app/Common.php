@@ -1,9 +1,11 @@
 <?php
 
+define('UPLOAD_PATH', FCPATH . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR);
+
 function setAllRoutes($routes)
 {
     $routes->get('/', 'Login::index');
-    $routes->get('/admin', 'Home::admin');
+    $routes->get('/dashboard', 'Dashboard::index');
 }
 
 if (!function_exists('env_is')) {

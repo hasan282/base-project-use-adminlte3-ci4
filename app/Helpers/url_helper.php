@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('')) {
+if (!function_exists('full_url')) {
     function full_url($baseurl = true)
     {
         $result = '';
