@@ -23,7 +23,9 @@ class Plugins
                 ['url' => '(base_url)/adminlte/asset/css/adminlte.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/jquery/jquery.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'tipe' => 'js|foot'],
-                ['url' => '(base_url)/adminlte/asset/js/adminlte.min.js', 'tipe' => 'js|foot']
+                ['url' => '(base_url)/adminlte/asset/js/adminlte.min.js', 'tipe' => 'js|foot'],
+                ['url' => '(base_url)/asset/css/self.admin.css(refresher)', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/asset/js/all/functions.js(refresher)', 'tipe' => 'js|foot']
             ),
             'fontawesome' => array(
                 ['url' => '(base_url)/adminlte/plugins/fontawesome-free/css/all.min.css', 'tipe' => 'css|head']
@@ -62,6 +64,14 @@ class Plugins
                 ['url' => '(base_url)/adminlte/plugins/select2/css/select2.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/select2/js/select2.full.min.js', 'tipe' => 'js|foot']
+            ),
+            'dropzone' => array(
+                ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.css', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.js', 'tipe' => 'js|foot'],
+                ['url' => '(base_url)/asset/js/all/upload.js(refresher)', 'tipe' => 'js|foot']
+            ),
+            'sweetalert' => array(
+                ['url' => '(base_url)/adminlte/plugins/sweetalert2/sweetalert2.all.min.js', 'tipe' => 'js|foot']
             )
             /*
             'name' => array(

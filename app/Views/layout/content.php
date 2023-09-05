@@ -29,9 +29,9 @@
                 <a href="#" class="card-link">Card link</a>
                 <a href="#" class="card-link">Another link</a>
             </div>
-        </div><!-- /.card -->
+        </div>
     </div>
-    <!-- /.col-md-6 -->
+
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header">
