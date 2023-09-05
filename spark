@@ -1,6 +1,14 @@
 #!/usr/bin/env php
 <?php
 
+// change to true if already move to hosting
+define('IS_HOSTING', false);
+// ---------------- dont forget to change public index.php
+
+// folder name on public_html
+define('PUBLIC_FOLDERNAME', !IS_HOSTING ? 'public' : 'public_foldername');
+// ------------------------------------------------- dont forget to change public index.php
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -34,7 +42,6 @@ if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
         $minPhpVersion,
         PHP_VERSION
     );
-
     exit($message);
 }
 
@@ -50,7 +57,15 @@ ini_set('display_errors', '1');
 define('SPARKED', true);
 
 // Path to the front controller
-define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
+define(
+    'FCPATH',
+    !IS_HOSTING ?
+        __DIR__ . DIRECTORY_SEPARATOR . PUBLIC_FOLDERNAME . DIRECTORY_SEPARATOR :
+        __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . PUBLIC_FOLDERNAME . DIRECTORY_SEPARATOR
+);
+
+// path of config paths.php file
+define('PATHS_CONFIG_FILE', __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php');
 
 // Ensure the current directory is pointing to the front controller's directory
 chdir(FCPATH);
@@ -66,7 +81,9 @@ chdir(FCPATH);
 
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
-require FCPATH . '../app/Config/Paths.php';
+
+require PATHS_CONFIG_FILE;
+
 // ^^^ Change this line if you move your application folder
 
 $paths = new Config\Paths();

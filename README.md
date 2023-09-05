@@ -1,11 +1,12 @@
 # Basic Project Template CI4-LTE3
-Use for your New Project, thanks to [Codeigniter](https://codeigniter.com/) and [AdminLTE](https://adminlte.io/).
+Gunakan untuk membuat project baru, thanks to [Codeigniter](https://codeigniter.com/) and [AdminLTE](https://adminlte.io/).
 
-## Installation
-Just download a `.zip` file.. LOL
+Harap perhatikan [Server Requirement Codeigniter4](https://www.codeigniter.com/user_guide/intro/requirements.html) dan Required Extension.
 
-## Setup
-Edit `.env` for your app, specifically the baseURL and any database settings.
+## Instalasi
+1. Download [AdminLTE Plugins, Fonts](https://drive.google.com/file/d/1zVXp5QAJeWHQMBM0hYUBTRsOO6Py_g1O/view?usp=sharing), dan [Vendor CI4](https://drive.google.com/file/d/185bv0a0YmxEqXbYJusgtymmsAMwpi0e6/view?usp=sharing).
+2. Extract `adminlte` dan `fonts` pada folder `public/`.
+3. Extract `vendor` pada folder utama.
 
 ## Server Requirements
 It's same as [Codeigniter 4](https://codeigniter.com/user_guide/intro/requirements.html) Server Requirements.
