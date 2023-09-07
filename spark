@@ -1,14 +1,5 @@
 #!/usr/bin/env php
 <?php
-
-// change to true if already move to hosting
-define('IS_HOSTING', false);
-// ---------------- dont forget to change public index.php
-
-// folder name on public_html
-define('PUBLIC_FOLDERNAME', !IS_HOSTING ? 'public' : 'public_foldername');
-// ------------------------------------------------- dont forget to change public index.php
-
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -17,6 +8,21 @@ define('PUBLIC_FOLDERNAME', !IS_HOSTING ? 'public' : 'public_foldername');
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
+
+$myConfiguration = [
+
+    // jadikan 'true' jika aplikasi di folder hosting
+    'production_server' => false,
+
+    // nama folder yang ada di dalam public_html
+    'public_foldername' => 'public'
+
+]; // ubah myConfiguration pada index.php juga
+
+define('MOVETO_HOSTING', $myConfiguration['production_server']);
+define('PUBLIC_FOLDER', MOVETO_HOSTING ? $myConfiguration['public_foldername'] : 'public');
+define('APPFOLDER', __DIR__ . DIRECTORY_SEPARATOR);
+define('PUBLIC_PATHFOLDER', APPFOLDER . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . PUBLIC_FOLDER . DIRECTORY_SEPARATOR);
 
 /*
  * --------------------------------------------------------------------
@@ -57,15 +63,7 @@ ini_set('display_errors', '1');
 define('SPARKED', true);
 
 // Path to the front controller
-define(
-    'FCPATH',
-    !IS_HOSTING ?
-        __DIR__ . DIRECTORY_SEPARATOR . PUBLIC_FOLDERNAME . DIRECTORY_SEPARATOR :
-        __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . PUBLIC_FOLDERNAME . DIRECTORY_SEPARATOR
-);
-
-// path of config paths.php file
-define('PATHS_CONFIG_FILE', __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php');
+define('FCPATH', MOVETO_HOSTING ? PUBLIC_PATHFOLDER : __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
 
 // Ensure the current directory is pointing to the front controller's directory
 chdir(FCPATH);
@@ -82,7 +80,8 @@ chdir(FCPATH);
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
 
-require PATHS_CONFIG_FILE;
+// require FCPATH . '../app/Config/Paths.php';
+require APPFOLDER . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php';
 
 // ^^^ Change this line if you move your application folder
 
@@ -94,6 +93,11 @@ require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstra
 // Load environment settings from .env files into $_SERVER and $_ENV
 require_once SYSTEMPATH . 'Config/DotEnv.php';
 (new CodeIgniter\Config\DotEnv(ROOTPATH))->load();
+
+// Define ENVIRONMENT
+if (!defined('ENVIRONMENT')) {
+    define('ENVIRONMENT', env('CI_ENVIRONMENT', 'production'));
+}
 
 // Grab our CodeIgniter
 $app = Config\Services::codeigniter();

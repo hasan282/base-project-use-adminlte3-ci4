@@ -1,24 +1,16 @@
 <?php
 
-// change to true if already move to hosting
-define('IS_HOSTING', false);
-// ---------------- dont forget to change spark
+$myConfiguration = [
 
-// folder name on public_html
-define('PUBLIC_FOLDERNAME', !IS_HOSTING ? 'public' : 'foldername_public');
-// ------------------------------------------------- dont forget to change spark
+    // jadikan 'true' jika aplikasi di folder hosting
+    'production_server' => false,
 
-// folder name on root directory
-define('APP_FOLDERNAME', 'foldername_in_root');
-// ------------------------------------------------
+    // nama folder tempat spark dan app yang ada di root
+    'app_foldername' => 'appfolder'
 
-// path of config paths.php file
-define(
-    'PATHS_CONFIG_FILE',
-    !IS_HOSTING ?
-        '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php' :
-        '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . APP_FOLDERNAME . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php'
-);
+]; // ubah myConfiguration pada spark juga
+
+define('MOVETO_HOSTING', $myConfiguration['production_server']);
 
 // Check PHP version.
 $minPhpVersion = '7.4'; // If you update this, don't forget to update `spark`.
@@ -28,7 +20,6 @@ if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
         $minPhpVersion,
         PHP_VERSION
     );
-
     exit($message);
 }
 
@@ -36,7 +27,9 @@ if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 
 // Ensure the current directory is pointing to the front controller's directory
-chdir(FCPATH);
+if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
+    chdir(FCPATH);
+}
 
 /*
  *---------------------------------------------------------------
@@ -50,9 +43,12 @@ chdir(FCPATH);
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
 
-require FCPATH . PATHS_CONFIG_FILE;
-
-// require realpath(FCPATH . PATHS_CONFIG_FILE) ?: FCPATH . PATHS_CONFIG_FILE;
+// require FCPATH . '../app/Config/Paths.php';
+if (MOVETO_HOSTING) {
+    require FCPATH . '..' . DIRECTORY_SEPARATOR . '..' . $myConfiguration['app_foldername'] . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php';
+} else {
+    require FCPATH . '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php';
+}
 
 // ^^^ Change this line if you move your application folder
 
@@ -65,13 +61,23 @@ require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstra
 require_once SYSTEMPATH . 'Config/DotEnv.php';
 (new CodeIgniter\Config\DotEnv(ROOTPATH))->load();
 
+// Define ENVIRONMENT
+if (!defined('ENVIRONMENT')) {
+    define('ENVIRONMENT', env('CI_ENVIRONMENT', 'production'));
+}
+
+// Load Config Cache
+// $factoriesCache = new \CodeIgniter\Cache\FactoriesCache();
+// $factoriesCache->load('config');
+// ^^^ Uncomment these lines if you want to use Config Caching.
+
 /*
  * ---------------------------------------------------------------
  * GRAB OUR CODEIGNITER INSTANCE
  * ---------------------------------------------------------------
  *
  * The CodeIgniter class contains the core functionality to make
- * the application run, and does all of the dirty work to get
+ * the application run, and does all the dirty work to get
  * the pieces all working together.
  */
 
@@ -84,8 +90,16 @@ $app->setContext($context);
  *---------------------------------------------------------------
  * LAUNCH THE APPLICATION
  *---------------------------------------------------------------
- * Now that everything is setup, it's time to actually fire
+ * Now that everything is set up, it's time to actually fire
  * up the engines and make this app do its thang.
  */
 
 $app->run();
+
+// Save Config Cache
+// $factoriesCache->save('config');
+// ^^^ Uncomment this line if you want to use Config Caching.
+
+// Exits the application, setting the exit code for CLI-based applications
+// that might be watching.
+exit(EXIT_SUCCESS);
