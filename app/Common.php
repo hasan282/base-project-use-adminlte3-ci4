@@ -1,31 +1,15 @@
 <?php
 
-define('UPLOAD_PATH', FCPATH . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR);
-
-function setAllRoutes($routes)
-{
-    $routes->get('/', 'Login::index');
-    $routes->get('/dashboard', 'Dashboard::index');
-}
-
-if (!function_exists('env_is')) {
-    /** Cek Environment saat ini
-     * @param string $env tipe environtment
-     */
-    function env_is(string $env)
-    {
-        $environtment = getenv('CI_ENVIRONMENT') ?: 'production';
-        return ($env == $environtment);
-    }
-}
-
-if (!function_exists('nl2space')) {
-    /** Replace semua New Line menjadi Spasi
-     * @param string $str Content
-     * @return string Content tanpa New Line
-     */
-    function nl2space(string $str)
-    {
-        return trim(preg_replace('/\s\s+/', ' ', $str));
-    }
-}
+/**
+ * The goal of this file is to allow developers a location
+ * where they can overwrite core procedural functions and
+ * replace them with their own. This file is loaded during
+ * the bootstrap process and is called during the framework's
+ * execution.
+ *
+ * This can be looked at as a `master helper` file that is
+ * loaded early on, and may also contain additional functions
+ * that you'd like to use throughout your entire application
+ *
+ * @see: https://codeigniter.com/user_guide/extending/common.html
+ */

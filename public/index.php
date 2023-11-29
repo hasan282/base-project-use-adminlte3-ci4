@@ -45,7 +45,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
 
 // require FCPATH . '../app/Config/Paths.php';
 if (MOVETO_HOSTING) {
-    require FCPATH . '..' . DIRECTORY_SEPARATOR . '..' . $myConfiguration['app_foldername'] . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php';
+    require FCPATH . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $myConfiguration['app_foldername'] . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php';
 } else {
     require FCPATH . '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php';
 }
