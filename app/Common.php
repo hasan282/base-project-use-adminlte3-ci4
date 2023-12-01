@@ -13,3 +13,25 @@
  *
  * @see: https://codeigniter.com/user_guide/extending/common.html
  */
+
+if (!function_exists('env_is')) {
+    /** check codeigniter environtment
+     * @param string $env development or production
+     */
+    function env_is(string $env): bool
+    {
+        $environtment = getenv('CI_ENVIRONMENT') ?: 'production';
+        return ($env == $environtment);
+    }
+}
+
+if (!function_exists('space_replace')) {
+    /**
+     * replace all space and new line
+     */
+    function space_replace(?string $string, string $replace = ' '): string
+    {
+        $result = preg_replace('/\s+/', $replace, '' . $string);
+        return trim($result);
+    }
+}

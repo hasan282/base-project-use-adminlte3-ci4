@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use Config\Services;
 
 /**
  * Class BaseController
@@ -35,13 +36,13 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['cookie', 'hash'];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
-    // protected $session;
+    protected $session, $plugin;
 
     /**
      * @return void
@@ -51,8 +52,18 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        // Preload any models, libraries, etc, here.
+        $this->session = Services::session();
+        $this->plugin  = Services::plugins();
+    }
 
-        // E.g.: $this->session = \Config\Services::session();
+    /**
+     * call a codeigniter view with some modify
+     */
+    protected function view(string $view, array $data = []): string
+    {
+        $data['darkmode'] = intval(get_cookie('DRKMOD') ?? '0') === 1;
+        $data['plugins']  = $this->plugin->get();
+        $viewscript = view($view, $data);
+        return env_is('production') ? space_replace($viewscript) : $viewscript;
     }
 }

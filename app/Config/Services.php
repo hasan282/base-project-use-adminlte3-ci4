@@ -29,4 +29,10 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+    public static function plugins()
+    {
+        if (!file_exists(APPPATH . 'Libraries/AdminPlugins.php')) return null;
+        return new \App\Libraries\AdminPlugins;
+    }
 }
