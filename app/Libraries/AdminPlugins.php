@@ -48,7 +48,7 @@ class AdminPlugins extends Plugin
             ['/adminlte/plugins/moment/moment.min.js',                                            'js',  'foot'],
             ['/adminlte/plugins/inputmask/jquery.inputmask.min.js',                               'js',  'foot'],
             ['/adminlte/plugins/daterangepicker/daterangepicker.js',                              'js',  'foot'],
-            ['/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',   'js',  'foot'],
+            ['/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',   'js',  'foot']
         ));
 
         $this->plugin('dateinput', array(
@@ -60,6 +60,30 @@ class AdminPlugins extends Plugin
             ['/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',   'js',  'foot']
         ));
 
-        // ['','css.js','head.foot']
+        $this->plugin('jspdf', array(
+            ['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',         'js', 'foot'],
+            ['https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', 'js', 'foot']
+        ));
+
+        $this->plugin('pdfmake', array(
+            ['/adminlte/plugins/pdfmake/pdfmake.min.js', 'js', 'foot'],
+            ['/adminlte/plugins/pdfmake/vfs_fonts.js',   'js', 'foot']
+        ));
+
+        $this->plugin('select2', array(
+            ['/adminlte/plugins/select2/css/select2.min.css',                         'css', 'head'],
+            ['/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css', 'css', 'head'],
+            ['/adminlte/plugins/select2/js/select2.full.min.js',                      'js',  'foot']
+        ));
+
+        $this->plugin('dropzone', array(
+            ['/adminlte/plugins/dropzone/min/dropzone.min.css', 'css', 'head'],
+            ['/adminlte/plugins/dropzone/min/dropzone.min.js',  'js',  'foot'],
+            ['/asset/js/all/upload.js' . $refresh,              'js',  'foot']
+        ));
+
+        $this->plugin('sweetalert', array(
+            ['/adminlte/plugins/sweetalert2/sweetalert2.all.min.js', 'js', 'foot']
+        ));
     }
 }

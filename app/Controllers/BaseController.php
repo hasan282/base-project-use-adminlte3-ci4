@@ -54,6 +54,8 @@ abstract class BaseController extends Controller
 
         $this->session = Services::session();
         $this->plugin  = Services::plugins();
+
+        $this->plugin->set('basic');
     }
 
     /**
@@ -63,6 +65,7 @@ abstract class BaseController extends Controller
     {
         $data['darkmode'] = intval(get_cookie('DRKMOD') ?? '0') === 1;
         $data['plugins']  = $this->plugin->get();
+
         $viewscript = view($view, $data);
         return env_is('production') ? space_replace($viewscript) : $viewscript;
     }
