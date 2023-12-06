@@ -1,3 +1,10 @@
+#----------------------------
+# Public Folder
+#----------------------------
+
+public/adminlte/*
+public/fonts/*
+
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------

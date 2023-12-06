@@ -13,11 +13,11 @@ class AdminPlugins extends Plugin
         $this->plugin('basic', array(
             ['https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback', 'css', 'head'],
             ['/adminlte/asset/css/adminlte.min.css',                   'css', 'head'],
-            ['/asset/css/adminself.css' . $refresh,                    'css', 'head'],
+            ['/asset/css/admin.css' . $refresh,                        'css', 'head'],
             ['/adminlte/plugins/jquery/jquery.min.js',                 'js',  'foot'],
             ['/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'js',  'foot'],
             ['/adminlte/asset/js/adminlte.min.js',                     'js',  'foot'],
-            ['/asset/js/all/functions.js' . $refresh,                  'js',  'foot']
+            ['/asset/jscore/functions.js' . $refresh,                  'js',  'foot']
         ));
 
         $this->plugin('fontawesome', array(
