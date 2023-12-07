@@ -14,19 +14,19 @@ $application_title = 'My Application';
 
     <title><?= $application_title; ?><?= (isset($title)) ? ' · ' . $title : ''; ?></title>
 
-    <link rel="shortcut icon" href="/image/icon/icon64.png" type="image/png">
-    <link rel="icon" href="/image/icon/icon32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/image/icon/icon64.png" sizes="64x64" type="image/png">
-    <link rel="apple-touch-icon" href="/image/icon/icon128.png">
+    <link rel="shortcut icon" href="/image/icon/icon-64.png" type="image/png">
+    <link rel="icon" href="/image/icon/icon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/image/icon/icon-64.png" sizes="64x64" type="image/png">
+    <link rel="apple-touch-icon" href="/image/icon/icon-128.png">
 
     <style>
         .bg-pattern {
-            background-image: url("<?= base_url('image/content/patterns/pattern_two_light.jpg'); ?>");
+            background-image: url("<?= base_url('image/pattern/pattern-light.webp'); ?>");
             background-color: #F4F6F9;
         }
 
         .bg-pattern-dark {
-            background-image: url("<?= base_url('image/content/patterns/pattern_two_dark.jpg'); ?>");
+            background-image: url("<?= base_url('image/pattern/pattern-dark.webp'); ?>");
             background-color: #454D55;
         }
     </style>

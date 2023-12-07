@@ -4,7 +4,7 @@ $userName  = userdata('nama')    ?? 'User Name';
 $userImage = userdata('foto')    ?? 'https://avatars.githubusercontent.com/u/47323055';
 $userRole  = userdata('role_id') ?? '101';
 
-$brandImage = 'https://icon-library.com/images/admin-icon-png/admin-icon-png-9.jpg';
+$brandImage = '/image/icon/icon-64.png';
 
 $navigations = \App\Models\Core\SideMenu::get($userRole);
 
@@ -26,7 +26,7 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
         <nav class="mt-2 pb-5">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="/#dashboard" class="nav-link<?= url_is('dashboard') ? ' active' : ''; ?>">
+                    <a href="/dashboard" class="nav-link<?= url_is('dashboard') ? ' active' : ''; ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
