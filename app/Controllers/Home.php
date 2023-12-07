@@ -6,7 +6,7 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        $this->plugin->set(['fontawesome', 'select2']);
+        $this->plugin->set('scrollbar');
         return $this->view('layout/blank');
     }
 }

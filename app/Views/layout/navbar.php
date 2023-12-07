@@ -1,7 +1,8 @@
 <?php
 
-$userName = userdata('nama') ?? 'User Name';
-$userImage = userdata('foto') ?? 'https://avatars.githubusercontent.com/u/47323055';
+$userName    = userdata('nama')   ?? 'User Name';
+$userImage   = userdata('foto')   ?? 'https://avatars.githubusercontent.com/u/47323055';
+$userSubInfo = userdata('office') ?? 'PT ABC Indonesia';
 
 $navMenu = array(
     ['menu' => 'Dashboard', 'url' => '#dashboard', 'icon' => 'fas fa-tachometer-alt'],
@@ -29,7 +30,9 @@ $navMenu = array(
         <li class="nav-item d-flex">
             <div class="custom-control custom-switch my-auto mr-3">
                 <input <?= $darkmode ? 'checked ' : ''; ?>type="checkbox" class="custom-control-input cursor-pointer" id="darkswitch">
-                <label class="custom-control-label text-secondary cursor-pointer" for="darkswitch"><i class="fas fa-moon"></i></label>
+                <label class="custom-control-label text-secondary cursor-pointer" for="darkswitch">
+                    <i class="fas fa-moon"></i>
+                </label>
             </div>
         </li>
 
@@ -42,11 +45,15 @@ $navMenu = array(
                 <li class="user-header">
                     <img src="<?= $userImage; ?>" class="img-circle elevation-2" alt="">
                     <p><?= $userName; ?></p>
-                    <small><?= userdata('office'); ?></small>
+                    <small><?= $userSubInfo; ?></small>
                 </li>
                 <li class="user-footer">
-                    <a href="/setting" class="btn btn-default btn-flat"><i class="fas fa-cog mr-1"></i>Pengaturan</a>
-                    <a href="/user/logout" class="btn btn-default btn-flat float-right"><i class="fas fa-sign-out-alt mr-1"></i>Keluar</a>
+                    <a href="/setting" class="btn btn-default btn-flat">
+                        <i class="fas fa-cog mr-1"></i>Pengaturan
+                    </a>
+                    <a href="/user/logout" class="btn btn-default btn-flat float-right">
+                        <i class="fas fa-sign-out-alt mr-1"></i>Keluar
+                    </a>
                 </li>
             </ul>
         </li>

@@ -3,11 +3,8 @@
 <?= $this->section('body'); ?>
 
 <?php
-
 $title = $title ?? 'Menu';
 $bread = $bread ?? $title;
-$darkmode = $darkmode ?? false;
-
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed<?= $darkmode ? ' dark-mode' : ''; ?>">
@@ -32,9 +29,11 @@ $darkmode = $darkmode ?? false;
 
                                         <?php if ($k + 1 === sizeof($bread)) : ?>
                                             <li class="breadcrumb-item active"><?= $br; ?></li>
-                                        <?php else :
-                                            $brs = explode('|', $br); ?>
-                                            <li class="breadcrumb-item"><a href="/<?= $brs[1] ?? ''; ?>"><?= $brs[0]; ?></a></li>
+                                        <?php else : ?>
+                                            <?php $brs = explode('|', $br); ?>
+                                            <li class="breadcrumb-item">
+                                                <a href="/<?= $brs[1] ?? ''; ?>"><?= $brs[0]; ?></a>
+                                            </li>
                                         <?php endif; ?>
 
                                     <?php endforeach; ?>

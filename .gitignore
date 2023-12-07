@@ -3,7 +3,9 @@
 #----------------------------
 
 public/adminlte/*
+!public/adminlte/index.html
 public/fonts/*
+!public/fonts/index.html
 
 #-------------------------
 # Operating Specific Junk Files

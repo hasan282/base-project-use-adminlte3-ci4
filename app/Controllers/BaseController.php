@@ -55,7 +55,7 @@ abstract class BaseController extends Controller
         $this->session = Services::session();
         $this->plugin  = Services::plugins();
 
-        $this->plugin->set('basic');
+        $this->plugin->set(['basic', 'fontawesome']);
     }
 
     /**
