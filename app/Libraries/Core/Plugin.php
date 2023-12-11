@@ -2,11 +2,18 @@
 
 namespace App\Libraries\Core;
 
-class Plugin
+abstract class Plugin
 {
     private array $plugins = [];
 
     private array $use = [];
+
+    public function __construct()
+    {
+        $this->plugins();
+    }
+
+    abstract protected function plugins();
 
     /**
      * get plugin HTML

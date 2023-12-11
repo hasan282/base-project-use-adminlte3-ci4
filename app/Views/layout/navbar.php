@@ -48,10 +48,10 @@ $navMenu = array(
                     <small><?= $userSubInfo; ?></small>
                 </li>
                 <li class="user-footer">
-                    <a href="/setting" class="btn btn-default btn-flat">
+                    <a href="/#setting" class="btn btn-default btn-flat">
                         <i class="fas fa-cog mr-1"></i>Pengaturan
                     </a>
-                    <a href="/user/logout" class="btn btn-default btn-flat float-right">
+                    <a href="/#logout" class="btn btn-default btn-flat float-right">
                         <i class="fas fa-sign-out-alt mr-1"></i>Keluar
                     </a>
                 </li>

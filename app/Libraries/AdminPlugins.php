@@ -6,7 +6,7 @@ use App\Libraries\Core\Plugin;
 
 class AdminPlugins extends Plugin
 {
-    public function __construct()
+    protected function plugins()
     {
         $refresh = env_is('production') ? '' : '?plug=in' . mt_rand(1000, 9999);
 
