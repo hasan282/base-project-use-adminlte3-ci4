@@ -9,4 +9,13 @@ class Home extends BaseController
         $this->plugin->set('scrollbar');
         return $this->view('layout/blank');
     }
+
+    public function table(): string
+    {
+        $data['title'] = 'Table';
+        $data['bread'] = ['Home|', 'Table'];
+
+        $this->plugin->set('scrollbar');
+        return $this->view('table/example', $data);
+    }
 }
